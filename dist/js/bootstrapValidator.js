@@ -2,7 +2,7 @@
  * BootstrapValidator (http://bootstrapvalidator.com)
  * The best jQuery plugin to validate form fields. Designed to use with Bootstrap 3
  *
- * @version     v0.5.2-dev, built on 2014-09-07 4:54:40 PM
+ * @version     v0.5.2-dev, built on 2014-09-08 1:44:14 AM
  * @author      https://twitter.com/nghuuphuoc
  * @copyright   (c) 2013 - 2014 Nguyen Huu Phuoc
  * @license     MIT
@@ -5349,6 +5349,7 @@ if (typeof jQuery === 'undefined') {
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid phone number in %s',
         countries: {
+            AU: 'Australia',
             BR: 'Brazil',
             CN: 'China',
             DK: 'Denmark',
@@ -5371,7 +5372,7 @@ if (typeof jQuery === 'undefined') {
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US', 'VE'],
+        COUNTRY_CODES: ['AU', 'BR', 'CN', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'TH', 'US', 'VE'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -5410,6 +5411,12 @@ if (typeof jQuery === 'undefined') {
 
             var isValid = true;
             switch (country.toUpperCase()) {
+                case 'AU':
+                    // Test: http://regexr.com/39f1j
+                    value   = $.trim(value);
+                    isValid = (/^(\+61\s?(2|3|4|7|8)|\(?0(2|3|4|7|8)\)?)\s?(\d{8}|\d{4}\s\d{4}|\d{2}\s\d{3}\s\d{3})$/).test(value);
+                    break;
+
                 case 'BR':
                     // Test: http://regexr.com/399m1
                     value   = $.trim(value);
